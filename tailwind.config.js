@@ -39,6 +39,7 @@ export default {
         }
       },
       boxShadow: {
+        '3xl': '0 35px 60px -12px rgba(0, 0, 0, 0.25)',
         'gov': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
         'gov-lg': '0 35px 60px -12px rgba(0, 0, 0, 0.3)',
         'inner-lg': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.1)',

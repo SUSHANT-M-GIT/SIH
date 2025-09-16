@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Custom utility classes */
 .line-clamp-3 {
@@ -59,12 +57,12 @@ input, textarea, select {
 
 .gov-button-primary {
   background: var(--gov-gradient-primary);
-  @apply text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95;
+  @apply text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-2xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95;
 }
 
 .gov-button-secondary {
   background: var(--gov-gradient-secondary);
-  @apply text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95;
+  @apply text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-2xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95;
 }
 
 .gov-header {
@@ -104,7 +102,7 @@ input, textarea, select {
 
 .gov-emblem::before {
   content: '';
-  @apply absolute -inset-2 rounded-full animate-pulse-slow;
+  @apply absolute -inset-2 rounded-full animate-pulse;
   background: var(--gov-gradient-tricolor);
   z-index: -1;
   filter: blur(8px);

@@ -339,6 +339,7 @@ The more details you provide, the better we can assist you..."
                     </div>
                   </motion.div>
                 </div>
+              </motion.div>
 
               {/* Location and File Upload in Grid */}
               <motion.div 

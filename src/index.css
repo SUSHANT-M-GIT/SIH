@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -46,24 +47,32 @@ input, textarea, select {
   font-size: 16px; /* Prevents iOS zoom */
 }
 
-/* Government themed utilities */
+/* Modern Government Components */
 .gov-card {
-  @apply bg-white/90 backdrop-blur-sm border border-slate-200/50 rounded-2xl shadow-xl;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--glass-shadow);
+  @apply rounded-3xl p-8 transition-all duration-300 hover:shadow-2xl hover:scale-[1.02];
 }
 
 .gov-button-primary {
   background: var(--gov-gradient-primary);
-  @apply text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border-0;
+  @apply text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95;
 }
 
 .gov-button-secondary {
   background: var(--gov-gradient-secondary);
-  @apply text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border-0;
+  @apply text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95;
 }
 
 .gov-header {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
-  @apply backdrop-blur-md border-b border-slate-200/50 shadow-sm;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  @apply shadow-2xl;
 }
 
 .gov-gradient-text {
@@ -71,23 +80,86 @@ input, textarea, select {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  @apply font-black tracking-tight;
 }
 
 .tricolor-border {
-  border-top: 4px solid var(--gov-saffron);
-  border-left: 4px solid var(--gov-white);
-  border-right: 4px solid var(--gov-green);
+  position: relative;
+}
+
+.tricolor-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--gov-gradient-tricolor);
+  border-radius: 3px;
 }
 
 .gov-emblem {
-  @apply relative;
+  @apply relative drop-shadow-2xl;
 }
 
 .gov-emblem::before {
   content: '';
-  @apply absolute -top-1 -left-1 -right-1 -bottom-1 rounded-full;
+  @apply absolute -inset-2 rounded-full animate-pulse-slow;
   background: var(--gov-gradient-tricolor);
   z-index: -1;
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+/* Glass morphism form elements */
+.glass-input {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  @apply rounded-2xl px-6 py-4 text-white placeholder-white/70 focus:border-white/40 focus:outline-none focus:ring-4 focus:ring-white/20 transition-all duration-300;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Animated elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 153, 51, 0.5); }
+  50% { box-shadow: 0 0 40px rgba(255, 153, 51, 0.8); }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glow-animation {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Professional cards */
+.premium-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  @apply rounded-3xl transition-all duration-500 hover:shadow-2xl;
+}
+
+.premium-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.4);
 }
 
 /* Blob animations */
@@ -152,34 +224,41 @@ input, textarea, select {
 }
 
 :root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
   font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 
-  /* Government of India Color Scheme */
+  /* Government of India Color Palette */
   --gov-saffron: #FF9933;
   --gov-white: #FFFFFF;
   --gov-green: #138808;
   --gov-navy: #000080;
   --gov-blue: #4F46E5;
-  --gov-light-blue: #EEF2FF;
+  --gov-indigo: #6366F1;
+  --gov-purple: #8B5CF6;
   --gov-orange: #F97316;
   --gov-gold: #D97706;
+  --gov-red: #EF4444;
   
-  /* Gradient Backgrounds */
+  /* Modern Gradient Backgrounds */
+  --gov-gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gov-gradient-primary: linear-gradient(135deg, var(--gov-saffron) 0%, var(--gov-orange) 100%);
-  --gov-gradient-secondary: linear-gradient(135deg, var(--gov-blue) 0%, var(--gov-navy) 100%);
-  --gov-gradient-tricolor: linear-gradient(to right, var(--gov-saffron) 0%, var(--gov-white) 50%, var(--gov-green) 100%);
-  --gov-gradient-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --gov-gradient-secondary: linear-gradient(135deg, var(--gov-blue) 0%, var(--gov-indigo) 100%);
+  --gov-gradient-tricolor: linear-gradient(45deg, var(--gov-saffron) 0%, var(--gov-white) 50%, var(--gov-green) 100%);
+  --gov-gradient-mesh: radial-gradient(circle at 20% 80%, #667eea 0%, transparent 50%), radial-gradient(circle at 80% 20%, #f093fb 0%, transparent 50%), radial-gradient(circle at 40% 40%, #ffecd2 0%, transparent 50%), linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   
-  color-scheme: light;
+  /* Glass morphism effects */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  
   color: #1e293b;
-  background: var(--gov-gradient-bg);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%);
 }
 
 a {
@@ -193,9 +272,17 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
-  font-size: 16px; /* Prevents iOS zoom on input focus */
+  font-size: 16px;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--gov-gradient-mesh);
+  background-attachment: fixed;
+  color: #1e293b;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {

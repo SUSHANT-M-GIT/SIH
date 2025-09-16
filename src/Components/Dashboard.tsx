@@ -56,37 +56,56 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--gov-gradient-bg)' }}>
-      {/* Header */}
-      <header className="gov-header tricolor-border">
-        <div className="max-w-7xl mx-auto mobile-container">
-          <div className="flex justify-between items-center py-4 sm:py-6">
-            <div className="flex items-center min-w-0 flex-1 space-x-3">
-              <GovEmblem size={48} className="flex-shrink-0" />
-              <div className="min-w-0">
-                <h1 className="text-lg sm:text-2xl font-bold gov-gradient-text truncate">
-                  <span className="hidden sm:inline">Government Complaint Portal</span>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+        
+        {/* Floating orbs */}
+        <div className="absolute top-10 left-10 w-72 h-72 bg-orange-400/20 rounded-full blur-3xl animate-bounce-slow"></div>
+        <div className="absolute top-60 right-20 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-green-400/20 rounded-full blur-3xl float-animation"></div>
+      </div>
+      {/* Stunning Header */}
+      <header className="relative z-10 gov-header">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
+            {/* Logo and Branding */}
+            <div className="flex items-center space-x-4">
+              <div className="relative">
+                <GovEmblem size={56} className="glow-animation" />
+                <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-green-400 rounded-full blur opacity-30 animate-pulse"></div>
+              </div>
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                  <span className="hidden sm:inline">Government Portal</span>
                   <span className="sm:hidden">Gov Portal</span>
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-600 truncate">
+                <p className="text-white/80 text-sm font-medium">
                   <span className="hidden sm:inline">भारत सरकार | Government of India</span>
                   <span className="sm:hidden">भारत सरकार</span>
                 </p>
               </div>
             </div>
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <div className="hidden sm:flex items-center space-x-2 px-3 py-2 bg-white/50 rounded-lg">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
-                  <User size={16} className="text-white" />
+            
+            {/* User Section */}
+            <div className="flex items-center space-x-4">
+              <div className="hidden sm:flex items-center space-x-3 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                <div className="w-10 h-10 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full flex items-center justify-center">
+                  <User size={18} className="text-white" />
                 </div>
-                <span className="text-sm font-medium text-slate-700 truncate max-w-32">{username || useremail}</span>
+                <div className="text-left">
+                  <p className="text-white font-semibold text-sm">{username || useremail?.split('@')[0]}</p>
+                  <p className="text-white/60 text-xs">Citizen</p>
+                </div>
               </div>
+              
               <button
                 onClick={handleLogout}
-                className="flex items-center space-x-1 px-3 py-2 sm:px-4 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors touch-target bg-white/50"
+                className="flex items-center space-x-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-200 hover:text-white rounded-2xl transition-all duration-300 backdrop-blur-sm border border-red-400/30"
               >
                 <LogOut size={16} />
-                <span className="hidden sm:inline">Logout</span>
+                <span className="hidden sm:inline font-medium">Logout</span>
               </button>
             </div>
           </div>
@@ -94,26 +113,43 @@ function Dashboard() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto mobile-container py-6 sm:py-8">
-        {/* Welcome Section */}
-        <div className="gov-card mobile-card mb-6 sm:mb-8">
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
-              <Shield size={24} className="text-white" />
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Hero Welcome Section */}
+        <div className="premium-card mb-12 p-8 md:p-12 text-center">
+          <div className="mb-8">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 rounded-full mb-6 float-animation">
+              <Shield size={32} className="text-white drop-shadow-lg" />
             </div>
-            <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
-                Welcome, {username || useremail?.split('@')[0]}!
-              </h2>
-              <p className="text-slate-600 text-sm sm:text-base flex items-center space-x-2">
-                <Flag size={16} className="text-orange-500" />
-                <span>Citizen Services Portal - भारत सरकार</span>
-              </p>
+            
+            <h2 className="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 mb-4">
+              Welcome back, {username || useremail?.split('@')[0]}!
+            </h2>
+            
+            <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
+              🇮🇳 Your digital gateway to citizen services. File complaints, track progress, and make your voice heard.
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-100 to-blue-100 rounded-full">
+                <Flag size={16} className="text-green-600" />
+                <span className="font-semibold text-green-700">Secure & Verified</span>
+              </div>
+              <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-orange-100 to-red-100 rounded-full">
+                <CheckCircle size={16} className="text-orange-600" />
+                <span className="font-semibold text-orange-700">24/7 Available</span>
+              </div>
+              <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full">
+                <Clock size={16} className="text-purple-600" />
+                <span className="font-semibold text-purple-700">Fast Resolution</span>
+              </div>
             </div>
           </div>
-          <p className="text-slate-700 bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
-            ἞E἟3 File and track your complaints through our secure government portal. Your voice matters for a better India.
-          </p>
+          
+          <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 rounded-2xl p-6 border border-blue-200">
+            <p className="text-gray-700 font-medium">
+              "भारत सरकार - Your voice drives our action. Together, we build a better India."
+            </p>
+          </div>
         </div>
 
         {/* Action Buttons */}

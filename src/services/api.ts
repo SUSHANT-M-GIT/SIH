@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { User, Complaint, CreateUserResponse, ComplaintResponse } from '../types';
 
-const BASE_URL = 'http://localhost:8080';
+// Dynamic API URL that works for both local and mobile access
+const BASE_URL = process.env.NODE_ENV === 'development' && window.location.hostname === 'localhost' 
+  ? 'http://localhost:8080'
+  : `http://${window.location.hostname}:8080`;
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -12,6 +15,14 @@ const api = axios.create({
 
 // API service functions
 export const apiService = {
+  // Login user
+  login: async (email: string, password: string): Promise<any> => {
+    const response = await api.get('/login', {
+      params: { email, password }
+    });
+    return response.data;
+  },
+
   // Create a new user
   createUser: async (userData: User): Promise<CreateUserResponse> => {
     const response = await api.post<CreateUserResponse>('/createuser', userData);

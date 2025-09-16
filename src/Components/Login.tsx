@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from '../Context/ContextProvider';
+import { apiService } from '../services/api';
 import GovEmblem from './GovEmblem';
 
 function Login() {
@@ -29,20 +30,31 @@ function Login() {
     setLoading(true);
     
     try {
-      // For now, we'll simulate login since the backend doesn't have login endpoint
-      // In real implementation, you'd call an authentication API
-      if (email && password) {
-        // Store user info in context
-        setUserEmail(email);
-        setUserName(email.split('@')[0]); // Use email prefix as name for now
-        
-        // Navigate to dashboard
-        navigate('/dashboard');
-      } else {
+      if (!email || !password) {
         setError('Please enter both email and password');
+        return;
       }
+
+      // Call backend login API
+      const response = await apiService.login(email, password);
+      
+      // If we get here, it means status is 200 (OK)
+      // Store user info in context
+      setUserEmail(email);
+      setUserName(email.split('@')[0]); // Use email prefix as name for now
+      
+      // Navigate to dashboard only on successful login
+      navigate('/dashboard');
+      
     } catch (err: any) {
-      setError('Login failed. Please try again.');
+      // Handle different HTTP status codes from backend
+      if (err.response?.status === 404) {
+        setError('User not found. Please check your email.');
+      } else if (err.response?.status === 400) {
+        setError('Invalid password. Please try again.');
+      } else {
+        setError('Login failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
